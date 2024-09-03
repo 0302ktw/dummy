@@ -33,7 +33,6 @@
             }
 
             .section-02 {
-                /* margin-top: -100vh; */
                 position: relative;
                 z-index: 10;
                 background: slateblue;
@@ -58,31 +57,22 @@
         <script>
             gsap.registerPlugin(ScrollTrigger);
 
-            let triggerArry = [];
-            let trigger01;
-            let trigger02;
-
-            const tl01 = gsap.timeline();
-
-            tl01.to('.section-01 h2', {
-                xPercent: 300,
-            }).to('.section-02', {
-                marginTop: '-100vh',
-                ease: 'none',
+            const tl01 = gsap.timeline({
+                scrollTrigger: {
+                    trigger: '.section-01',
+                    start: 'top top',
+                    end: '+=' + window.innerHeight * 2.5,
+                    scrub: true,
+                    pin: true,
+                },
             });
 
-            trigger01 = ScrollTrigger.create({
-                trigger: '.section-01',
-                start: 'top top',
-                end() {
-                    return document.querySelector('.section-01').clientHeight + document.querySelector('.section-01').clientHeight;
-                },
-                scrub: true,
-                pin: true,
-                // pinSpacing: false,
-                ease: 'none',
-                invalidateOnRefresh: true,
-                animation: tl01,
+            tl01.to('.section-01 h2', {
+                duration: 1,
+                xPercent: 300,
+            }).to('.section-02', {
+                duration: 3,
+                marginTop: '-100vh',
             });
         </script>
     </body>
