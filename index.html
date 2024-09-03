@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            h2 {
+                font-size: 2em;
+            }
+
+            .section {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 100vh;
+            }
+
+            .section-00 {
+                background: #444;
+            }
+
+            .section-01 {
+                background: #dff2b9;
+            }
+
+            .section-02 {
+                /* margin-top: -100vh; */
+                position: relative;
+                z-index: 10;
+                background: slateblue;
+            }
+
+            .footer {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 100%;
+                height: 500px;
+                background: crimson;
+                font-size: 2em;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="section section-00"><h2>section-00</h2></div>
+        <div class="section section-01"><h2>section-01</h2></div>
+        <div class="section section-02"><h2>section-02</h2></div>
+        <div class="footer"><h2>Footer</h2></div>
+        <script>
+            gsap.registerPlugin(ScrollTrigger);
+
+            let triggerArry = [];
+            let trigger01;
+            let trigger02;
+
+            const tl01 = gsap.timeline();
+
+            tl01.to('.section-01 h2', {
+                xPercent: 300,
+            }).to('.section-02', {
+                marginTop: '-100vh',
+                ease: 'none',
+            });
+
+            trigger01 = ScrollTrigger.create({
+                trigger: '.section-01',
+                start: 'top top',
+                end() {
+                    return document.querySelector('.section-01').clientHeight + document.querySelector('.section-01').clientHeight;
+                },
+                scrub: true,
+                pin: true,
+                // pinSpacing: false,
+                ease: 'none',
+                invalidateOnRefresh: true,
+                animation: tl01,
+            });
+        </script>
+    </body>
+</html>
