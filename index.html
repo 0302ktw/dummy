@@ -61,18 +61,21 @@
                 scrollTrigger: {
                     trigger: '.section-01',
                     start: 'top top',
-                    end: '+=' + window.innerHeight * 2.5,
+                    end: '+=' + window.innerHeight * 2,
                     scrub: true,
                     pin: true,
+                    invalidateOnRefresh: true,
                 },
             });
 
             tl01.to('.section-01 h2', {
                 duration: 1,
                 xPercent: 300,
+                ease: 'none',
             }).to('.section-02', {
-                duration: 3,
+                duration: 4,
                 marginTop: '-100vh',
+                ease: 'none',
             });
         </script>
     </body>
